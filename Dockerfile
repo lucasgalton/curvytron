@@ -1,4 +1,4 @@
-FROM 0.10.43-slim:latest
+FROM node:0.10-slim
 ENV app_dir /curvytron
 WORKDIR ${app_dir}
 ADD . ${app_dir}
