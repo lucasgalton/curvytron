@@ -18,7 +18,7 @@ function Server(config)
     this.onSocketDisconnection = this.onSocketDisconnection.bind(this);
     this.onError               = this.onError.bind(this);
 
-    this.app.use(express.static('web'));
+    this.app.use(express['static']('web'));
 
     this.server.on('error', this.onError);
     this.server.on('upgrade', this.authorizationHandler);
@@ -43,7 +43,6 @@ Server.prototype.authorizationHandler = function(request, socket, head)
         return socket.end();
     }
 
-
     var websocket = new WebSocket(request, socket, head, ['websocket'], {ping: 30}),
         ip = request.headers['x-real-ip'] || request.connection.remoteAddress;
 
@@ -58,7 +57,7 @@ Server.prototype.authorizationHandler = function(request, socket, head)
  */
 Server.prototype.onSocketConnection = function(socket, ip)
 {
-    var client = new SocketClient(socket, 3, ip);
+    var client = new SocketClient(socket, 1, ip);
     this.clients.add(client);
 
     client.on('close', this.onSocketDisconnection);

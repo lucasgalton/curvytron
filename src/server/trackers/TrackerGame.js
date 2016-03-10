@@ -78,7 +78,9 @@ GameTracker.prototype.onStop = function()
  */
 GameTracker.prototype.sendFPS = function()
 {
-    this.emit('fps', { tracker: this, fps: this.game.fps.value });
+    if (this.game.fps.frequency) {
+        this.emit('fps', { tracker: this, fps: this.game.fps.frequency });
+    }
 };
 
 /**
@@ -97,9 +99,9 @@ GameTracker.prototype.destroy = function()
 /**
  * @inheritDoc
  */
-GameTracker.prototype.serialize = function()
+GameTracker.prototype.getValues = function()
 {
-    var data = Tracker.prototype.serialize.call(this);
+    var data = Tracker.prototype.getValues.call(this);
 
     data.size     = this.size;
     data.rounds   = this.rounds;
