@@ -1,4 +1,4 @@
-FROM node:onbuild
+FROM 0.10.43-slim:latest
 ENV app_dir /curvytron
 WORKDIR ${app_dir}
 ADD . ${app_dir}
